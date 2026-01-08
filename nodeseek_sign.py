@@ -260,7 +260,7 @@ def sign(ns_cookie, ns_random):
         if response.status_code == 403:
             print("[ERROR] 403 Forbidden - 仍被 Cloudflare 阻拦")
             print(f"[DEBUG] 响应内容: {response.text[:300]}")
-            return None
+            return "blocked", "403 Forbidden - Cloudflare 已拦截"
         data = response.json()
         msg = data.get("message", "")
         if "鸡腿" in msg or data.get("success"):
@@ -540,4 +540,5 @@ if __name__ == "__main__":
             print("所有Cookie已成功保存")
         except Exception as e:
             print(f"保存Cookie变量异常: {e}")
+
 
